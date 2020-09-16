@@ -13,7 +13,7 @@ const WishlistSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : "user"
     }
-});
+}, { timestamps: true });
 
 const Wishlist = mongoose.model("wishlist", WishlistSchema);
 module.exports = Wishlist;

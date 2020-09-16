@@ -17,6 +17,21 @@ class UserController{
             email : req.userdata.email,
         })
     }
+    deleteuser(req,res){
+        user.findByIdAndDelete(req.params.id).then(function () {
+            res.send("post Deleted").catch(function (e) {
+                res.send(e)
+            })
+        })
+    }
+    
+    getAllUsers(req,res){
+        user.find().then(function (findAllpost) {
+            res.send(findAllpost).catch(function (e) {
+                res.send(e)
+            })
+        })
+    }
 
     updateUserDetails(req, res){
 

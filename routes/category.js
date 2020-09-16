@@ -13,8 +13,8 @@ router.get('/category/:limit', category.getCategoryWithLimit)
 
 router.post('/category', [uploadImage], category.addCategory);
 
-
-router.patch('/category/:id', category.updateCategory);
+router.get('/categorys/:id', category.getcategorybyid);
+router.put('/category/:id',[uploadImage], category.updateCategory);
 router.delete('/category/:id',category.deleteCategory);
 
 module.exports = router;

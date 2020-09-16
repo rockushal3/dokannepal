@@ -45,7 +45,7 @@ const OrderSchema = new Schema({
     isDelivered : {
         type : Boolean
     }
-})
+}, { timestamps: true });
 
 
 const Order = mongoose.model("order", OrderSchema);

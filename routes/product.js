@@ -14,8 +14,10 @@ router.get('/product/order/desc', product.getLatestProducts);
 router.get('/product/exclusive/discount', product.getExclusiveProducts);
 router.get('/product/brand/:brand/:id', product.getProductsByBrand);
 
+router.get('/allproduct',product.getproductDetail)
+
 router.post('/product', [uploadMultiple] ,product.addProducts);
-router.patch('/product/:id', product.updateProducts);
+router.put('/product/:id', product.updateProducts);
 router.delete('/product/:id',product.deleteProducts);
 router.get('/product/search/:search', product.getProductsBySearch);
 

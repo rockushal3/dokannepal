@@ -39,13 +39,21 @@ class OrderController{
             })
         })
     }
+
+    updateOrder(req,res){
+        order.findByIdAndUpdate(req.params.id, req.body).then(function () {
+            res.status(200).send().catch(function (e) {
+                res.status(400).send()
+                console.log(e)
+            })
+        
+    })
+    }
     
     addOrders(req, res){
         var id = req.userdata.id;
 
        req.body.map(value => {
-      
-
         let shippingAddress = {
             fullname : value.shippingAddress.fullname,
             phonenumber : value.shippingAddress.phonenumber,
@@ -70,7 +78,16 @@ class OrderController{
            message: "Order Added Successfully"
        })
     }
-
+    getallorder(req,res){
+        order.find().populate('productid').populate('userid').then(function(getdata){
+            res.send(getdata)
+        })
+    }
+    getallorderpending(req,res){
+        order.find({isDelivered:false}).then(function(getdata){
+            res.send(getdata)
+        })
+    }
     getOrdersByUser(req, res){
         let id = req.userdata._id
             order.find({userid : id} ).populate({ 

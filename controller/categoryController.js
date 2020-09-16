@@ -6,7 +6,6 @@ class CategoryController{
 
 
     addCategory(req, res){
-
         req.files.map(function(item, index){    
             var imagename = item.filename;
             var path = "public/images/categories/";
@@ -55,15 +54,38 @@ class CategoryController{
             })
         }).limit(limit)
 }
-    updateCategory(req, res){
 
+    getcategorybyid(req,res){
+        category.findById(req.params.id)
+        .then(function (postById) {
+            res.send(postById)
+        }).catch(function (e) {
+            res.send(e)
+        })
+    }
+    updateCategory(req, res){
+        
+        req.files.map(function (items) {
+            const User = {
+                category_name : req.body.category,
+                image: items.filename
+            }
+            category.findByIdAndUpdate(req.params.id, User).then(function () {
+                res.status(200).send().catch(function (e) {
+                    res.status(400).send()
+                    console.log(e)
+                })
+            })
+        })
     }
 
     deleteCategory(req, res){
-        
+        category.findByIdAndDelete(req.params.id).then(function () {
+            res.send("post Deleted").catch(function (e) {
+                res.send(e)
+            })
+        })
     }
-
-
 }
 
 

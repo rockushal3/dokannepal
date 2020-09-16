@@ -64,7 +64,8 @@ class ProductController{
 
 
     addProducts(req, res){
-
+ 
+        console.log(req.body)
             product.create({
                 product_name : req.body.name,
                 category_id : req.body.category,
@@ -164,6 +165,14 @@ class ProductController{
             });
         })
     
+    }
+
+    getproductDetail(req,res){
+        product.find().populate('category_id').populate('discount').then(function (findAllpost) {
+            res.send(findAllpost).catch(function (e) {
+                res.send(e)
+            })
+        })
     }
 
     getLatestProducts(req, res){
@@ -447,11 +456,21 @@ class ProductController{
     }
 
     updateProducts(req, res){
-
+        product.findByIdAndUpdate(req.params.id, req.body).then(function () {
+            res.status(200).send().catch(function (e) {
+                res.status(400).send()
+                console.log(e)
+            })
+        
+    })
     }
 
     deleteProducts(req, res){
-
+        product.findByIdAndDelete(req.params.id).then(function () {
+            res.send("post Deleted").catch(function (e) {
+                res.send(e)
+            })
+        })
     }
 
 }
